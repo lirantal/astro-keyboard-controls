@@ -1,6 +1,6 @@
 [![npm](https://img.shields.io/npm/v/astro-keyboard-controls.svg)](https://www.npmjs.com/package/astro-keyboard-controls)
 [![npm](https://img.shields.io/npm/l/astro-keyboard-controls.svg)](https://www.npmjs.com/package/astro-keyboard-controls)
-[![Build Status](https://github.com/lirantal/astro-keyboard-controls/workflows/unit-tests/badge.svg)](https://github.com/lirantal/astro-keyboard-controls/workflows/unit-tests)
+[![Build Status](https://github.com/lirantal/astro-keyboard-controls/workflows/release/badge.svg)](https://github.com/lirantal/astro-keyboard-controls/workflows/release)
 [![Known Vulnerabilities](https://snyk.io/test/github/lirantal/astro-keyboard-controls/badge.svg)](https://snyk.io/test/github/lirantal/astro-keyboard-controls)
 
 # Astro Keyboard Controls
