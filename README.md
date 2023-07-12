@@ -29,6 +29,13 @@ import KeyboardControls from 'astro-keyboard-controls';
 </Layout>
 ```
 
+### Available component props
+
+| Name              | Type                              | Example                       | Description                                        |
+| ----------------- | --------------------------------- | ----------------------------- | -------------------------------------------------- |
+| `selector`         | String                           | `div#search input`        | A string specifying the selector that is passed to `document.querySelector()` |
+| `site`            | String                            | `/` | The keyboard key to bind with an event listener for `keydown` |
+
 ## Author
 
 Liran Tal <liran@lirantal.com>
