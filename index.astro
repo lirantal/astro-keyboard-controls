@@ -1,17 +1,19 @@
 ---
-
 export type Props = {
     selector: string;
+    key: string;
 }
 
-const { selector }  = Astro.props
+const { selector, key }  = Astro.props
 ---
 
-<script is:inline define:vars={{selector}} >
-    window.addEventListener('keydown', (event) => {
-		if (event.key === '/' || event.key === '.') {
-			event.preventDefault();
-			document.querySelector(selector).focus();
-		}
-	});
+<script is:inline define:vars={{selector, key}} >
+    if (selector && key) {
+        window.addEventListener('keydown', (event) => {
+            if (event.key === key) {
+                event.preventDefault();
+                document.querySelector(selector).focus();
+            }
+        });
+    }
 </script>
