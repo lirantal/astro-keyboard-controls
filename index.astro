@@ -1,0 +1,17 @@
+---
+
+export type Props = {
+    selector: string;
+}
+
+const { selector }  = Astro.props
+---
+
+<script is:inline define:vars={{selector}} >
+    window.addEventListener('keydown', (event) => {
+		if (event.key === '/' || event.key === '.') {
+			event.preventDefault();
+			document.querySelector(selector).focus();
+		}
+	});
+</script>
