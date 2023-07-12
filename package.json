@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["astro", "astrojs", "astrojs-plugin", "astro-plugin", "astro-keyboard-controls"],
+  "keywords": ["astro", "astrojs", "astro-component", "astro-plugin", "astro-keyboard-controls"],
   "author": {
     "name": "Liran Tal",
     "email": "liran.tal@gmail.com",
