@@ -18,7 +18,8 @@
     "astrojs",
     "astro-component",
     "astro-plugin",
-    "astro-keyboard-controls"
+    "astro-keyboard-controls",
+    "accessibility"
   ],
   "author": {
     "name": "Liran Tal",
