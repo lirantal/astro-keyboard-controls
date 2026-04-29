@@ -1,6 +1,6 @@
 [![npm](https://img.shields.io/npm/v/astro-keyboard-controls.svg)](https://www.npmjs.com/package/astro-keyboard-controls)
 [![npm](https://img.shields.io/npm/l/astro-keyboard-controls.svg)](https://www.npmjs.com/package/astro-keyboard-controls)
-[![Build Status](https://github.com/lirantal/astro-keyboard-controls/workflows/release/badge.svg)](https://github.com/lirantal/astro-keyboard-controls/workflows/release)
+[![Build Status](https://github.com/lirantal/astro-keyboard-controls/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/lirantal/astro-keyboard-controls/workflows/release)
 
 # Astro Keyboard Controls
 
