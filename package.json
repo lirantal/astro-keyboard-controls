@@ -1,4 +1,8 @@
 {
+  "publishConfig": {
+    "provenance": true,
+    "access": "public"
+  },
   "name": "astro-keyboard-controls",
   "version": "1.0.0",
   "description": "An Astro plugin that binds keyboard keys for actions like focus on search box and others",
