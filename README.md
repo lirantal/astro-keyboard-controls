@@ -35,6 +35,10 @@ import KeyboardControls from 'astro-keyboard-controls';
 | `selector`         | String                           | `div#search input`        | A string specifying the selector that is passed to `document.querySelector()` |
 | `site`            | String                            | `/` | The keyboard key to bind with an event listener for `keydown` |
 
+## Documentation
+
+- [Project documentation](./docs/README.md) - development, testing, architecture, and conventions.
+
 ## Contributing
 
 Please consult [CONTRIBUTING](./CONTRIBUTING.md) for guidelines on contributing to this project.

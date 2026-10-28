@@ -1,96 +1,84 @@
 # Release
 
-This project uses [Changesets](https://github.com/changesets/changesets) to record release intent before the version and publish steps run.
+This project uses [Changesets](https://github.com/changesets/changesets) for
+versioning and release notes. Run these commands from the repository root after
+installing dependencies with `npm ci`.
 
-Use the command that matches the repository's package manager:
+## Add a changeset
 
-- npm: `npx @changesets/cli`
-- pnpm: `pnpx @changesets/cli`
-
-## Release tooling
-
-This project uses the [Changesets](https://github.com/changesets/changesets)
-tool to manage semantic versioning and release notes.
-
-## Pre-requisites
-
-Permit GitHub Actions to create and approve pull requests:
-
-1. Go to Actions -> General in the repository settings: (`https://github.com/<user>/<repo>/settings/actions`)
-2. In `Workflow permissions` enable the toggle for
-`Allow GitHub Actions to create and approve pull requests` (it is not required
-to also toggle the `Read and write permission` option)
-
-## Add a changeset interactively
-
-Run the Changesets CLI and follow the prompts:
+For a user-facing package change, run the locally installed Changesets CLI:
 
 ```sh
-# npm
-npx @changesets/cli
-
-# pnpm
-pnpx @changesets/cli
+npm exec -- changeset
 ```
 
-The CLI asks which package changed, what semver bump is needed, and what summary should go in the changelog. Use:
+The CLI selects this package and asks for a version bump and changelog summary.
 
-- `patch` for backward-compatible fixes and small internal changes
-- `minor` for backward-compatible new functionality
-- `major` for breaking changes
+Choose `patch` for backward-compatible fixes, `minor` for backward-compatible
+features, and `major` for breaking changes. Write a summary for package users.
 
-Then commit and push the generated changeset:
+Documentation-only, test-only, and internal refactor PRs usually do not need a
+changeset unless they accompany a release-worthy behavior change.
 
-```sh
-git add .changeset
-git commit -m "chore: release"
-git push origin HEAD --no-verify
-```
+### Without an interactive TTY
 
-## Add a changeset without an interactive TTY
-
-The Changesets CLI is mostly interactive when creating a normal changeset. If a TTY is not available, write the changeset file directly.
-
-First, read the package name from `package.json` instead of hard-coding it:
+Create a Markdown file in `.changeset/` with YAML front matter identifying the
+package and version bump. Choose an unused, descriptive filename for each change.
 
 ```sh
 PACKAGE_NAME=$(node -p "require('./package.json').name")
-```
-
-Create a changeset file under `.changeset/`:
-
-```sh
-CHANGESET_FILE=".changeset/$(date +%s)-release.md"
-
-cat > "$CHANGESET_FILE" <<EOF
+cat > .changeset/package-fix.md <<EOF
 ---
 "$PACKAGE_NAME": patch
 ---
 
-Describe the change here.
+Describe the user-facing fix here.
 EOF
 ```
 
-Replace `patch` with `minor` or `major` when the change requires a larger semver bump. Keep the summary short and user-facing; it is used by Changesets when generating release notes.
+Replace the example summary with the actual change and select the appropriate
+version bump. Read the package name from `package.json` as shown above.
 
-Commit and push the changeset:
+Validate the changeset without versioning or publishing:
+
+```sh
+npm exec -- changeset status
+```
+
+Commit the changeset with the implementation and push the branch normally:
 
 ```sh
 git add .changeset
-git commit -m "chore: release"
-git push origin HEAD --no-verify
+git commit -m "chore: add changeset"
+git push origin HEAD
 ```
 
-## Version and publish
+## Automated release flow
 
-After the changeset lands on the release branch, run the configured package scripts when it is time to cut and publish the release:
+The [release workflow](.github/workflows/release.yml) runs on pushes to `main`.
+When pending changesets exist, Changesets creates or updates a release PR with
+version bumps and changelog entries. Review that PR and merge it when ready.
+The workflow then publishes the versioned packages to npm.
+
+The workflow needs permission to create release PRs. In repository
+**Settings > Actions > General > Workflow permissions**, enable
+**Allow GitHub Actions to create and approve pull requests**. The workflow
+declares its own token permissions; enabling the global read/write default is
+not required. Publishing also requires the workflow's configured npm credentials.
+
+## Manual release commands
+
+The workflow normally runs these scripts. For a deliberate manual release,
+first ensure the intended changes are merged and checks pass:
 
 ```sh
-# npm
 npm run version
-npm run release
-
-# pnpm
-pnpm run version
-pnpm run release
 ```
+
+Review and commit the generated version and changelog changes before publishing:
+
+```sh
+npm run release
+```
+
+The release command publishes to npm; it is not a validation command.
